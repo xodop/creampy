@@ -9,11 +9,12 @@ addr = addr.split('.')
 mask = mask.split('.')
 
 #расчет адреса сети
-net = []
+NET = []
 for i in range(4):
     net_i = int(addr[i]) & int(mask[i])
-    net.append(str(net_i))
-net = '.'.join(net)
+    NET.append(net_i)
+temp_addr = [str(item) for item in NET]             #сделать функцией
+net = '.'.join(temp_addr)
 
 #расчет адреса и маски в двоичном виде
 bin_addr = '{:08b}.{:08b}.{:08b}.{:08b}'.format(int(addr[0]), int(addr[1]), int(addr[2]), int(addr[3]))
@@ -25,13 +26,23 @@ mask_len = bin_mask.count('1')
 #расчет числа хостов
 host_count = 2 ** bin_mask.count('0') - 2
 
+#расчет броадкастового адреса
+
+#расчет минимального и максимального адреса
+min_host = temp_addr.copy()
+min_host[3] = str(int(min_host[3]) + 1)
+min_host = '.'.join(min_host)
+
+#max_host = broadcast[3] << 1
+
 #шаблон
 template = '''
 Адрес в двоичном виде:      {}
 Маска в двоичном виде:      {}
 Длина префикса:             {}
 Адрес подсети:              {}
+Минимальный адрес хоста:    {}
 Доступно хостов:            {}
 '''
 
-print(template.format(bin_addr, bin_mask, mask_len, net, host_count))
+print(template.format(bin_addr, bin_mask, mask_len, net, min_host, host_count))
