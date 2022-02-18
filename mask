@@ -1,0 +1,37 @@
+#ввод в формате a.b.c.d
+print('Введите адрес')
+addr = input()
+print('Введите маску')
+mask = input()
+
+#преобразование в список по разделителю
+addr = addr.split('.')
+mask = mask.split('.')
+
+#расчет адреса сети
+net = []
+for i in range(4):
+    net_i = int(addr[i]) & int(mask[i])
+    net.append(str(net_i))
+net = '.'.join(net)
+
+#расчет адреса и маски в двоичном виде
+bin_addr = '{:08b}.{:08b}.{:08b}.{:08b}'.format(int(addr[0]), int(addr[1]), int(addr[2]), int(addr[3]))
+bin_mask = '{:08b}.{:08b}.{:08b}.{:08b}'.format(int(mask[0]), int(mask[1]), int(mask[2]), int(mask[3]))
+
+#расчет длины префикса
+mask_len = bin_mask.count('1')
+
+#расчет числа хостов
+host_count = 2 ** bin_mask.count('0') - 2
+
+#шаблон
+template = '''
+Адрес в двоичном виде:      {}
+Маска в двоичном виде:      {}
+Длина префикса:             {}
+Адрес подсети:              {}
+Доступно хостов:            {}
+'''
+
+print(template.format(bin_addr, bin_mask, mask_len, net, host_count))
