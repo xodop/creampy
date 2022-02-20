@@ -1,6 +1,16 @@
-#ввод в формате a.b.c.d
-addr = input('Введите адрес: ')
-mask = input('Введите маску: ')
+#ввод в формате x.x.x.x
+while True:
+    addr = input('Введите адрес: ')
+    if addr.count('.') != 3:
+        print('Введите адрес в формате x.x.x.x')
+    else:
+        break
+while True:
+    mask = input('Введите маску: ')
+    if mask.count('.') != 3:
+        print('Введите адрес в формате x.x.x.x')
+    else:
+        break
 
 #преобразование в список по разделителю
 addr = addr.split('.')
