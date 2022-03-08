@@ -98,4 +98,5 @@ def main():
 
     return print(template.format(bin_addr, bin_mask, mask_len, net, host_count))
 
-main()
+if __name__ == '__main__':
+    main()
