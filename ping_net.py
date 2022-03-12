@@ -1,4 +1,4 @@
-#!/bin/python3
+#!/home/vagrant/venv/pyneng-py3-7/bin/python3.7
 
 import ipaddress
 import subprocess
@@ -18,7 +18,7 @@ def ping_net():
     ip_route = ip_route.stdout.split('\n')
     
     for line in ip_route:
-        if 'br1' in line:                                              #фильтр по подсетке
+        if 'br1' in line:                                               #фильтр по подсетке
             subnet = ipaddress.ip_network(line.split()[0])
             
     pp_ip = []
@@ -46,10 +46,10 @@ def ping_net():
 
 if __name__ == "__main__":
     reachable, unreachable = ping_net()
-    print('Доступные адреса | Недоступные адреса')
-    print(f'{"":17}{"|"}')
+    print(' Доступные адреса | Недоступные адреса ')
+    print('-'*40)
     for r, u in itertools.zip_longest(reachable, unreachable, fillvalue=' '): 
-        print(f'{r:17}{"|":2}{u}') 
+        print(f'{" ":1}{r:17}{"|":2}{u}') 
             
     
         
