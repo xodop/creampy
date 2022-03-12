@@ -1,4 +1,4 @@
-#!/bin/python3
+#!/home/vagrant/venv/pyneng-py3-7/bin/python3
 
 import ipaddress
 import subprocess
