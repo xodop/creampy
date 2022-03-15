@@ -44,15 +44,28 @@ def description_rewriter(path_file):
      
     
     iface_and_descr_new = zip(ifaces, descrs)
-    
     '''
     descrs = '\n'.join(descrs)
     with open(r'output.log', 'w') as f:
         descr = f.write(descrs)
     '''
+    return(list(set(iface_and_descr_new).difference(set(iface_and_descr))))
+
+
+def commands_generator(iface_and_descr_dict):
     
-    return(dict(set(iface_and_descr_new).difference(set(iface_and_descr))))
+    template = '''
+interface {}
+ description {}
+'''
+    print('system-view')
+    for items in iface_and_descr_dict:
+        iface, descr = zip(items)
+        iface = ''.join(iface)
+        descr = ''.join(descr)
+        print(template.format(iface, descr), end='')
 
 if __name__ == "__main__":
     ifde = description_rewriter('MBH_25_00015_1-220223_1508.log')
-    pprint(ifde)
+    commands_generator(ifde)
+    
